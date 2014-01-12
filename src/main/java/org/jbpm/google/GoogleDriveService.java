@@ -29,9 +29,9 @@ public class GoogleDriveService {
 	 */
 	private static final String APPLICATION_NAME = "jBPM Integration";
 
-	private static Drive service;
+	private Drive service;
 
-	static {
+	public GoogleDriveService() {
 		// Create a new authorized API client
 		try {
 			service = new Drive.Builder(
@@ -39,11 +39,10 @@ public class GoogleDriveService {
 					JacksonFactory.getDefaultInstance(), AuthHelper.authorize())
 					.setApplicationName(APPLICATION_NAME).build();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Get file's metadata.
 	 * 
@@ -189,7 +188,7 @@ public class GoogleDriveService {
 	 */
 	public void deleteFile(String fileId) {
 		try {
-			service.files().delete(fileId).execute();
+			service.files().delete(fileId).executeUnparsed();
 		} catch (IOException e) {
 			System.out.println("An error occurred: " + e);
 		}

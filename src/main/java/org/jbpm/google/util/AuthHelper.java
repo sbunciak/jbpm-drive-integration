@@ -57,8 +57,10 @@ public class AuthHelper {
 		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
 				httpTransport, JSON_FACTORY, clientSecrets,
 				Arrays.asList(DriveScopes.DRIVE))
-				.setDataStoreFactory(dataStoreFactory).setAccessType("online")
-				.setApprovalPrompt("auto").build();
+				.setDataStoreFactory(dataStoreFactory)
+				//.setAccessType("online")
+				//.setApprovalPrompt("auto")
+				.build();
 		// authorize
 		return new AuthorizationCodeInstalledApp(flow,
 				new LocalServerReceiver()).authorize("user");

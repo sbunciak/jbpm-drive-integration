@@ -30,7 +30,7 @@ public class GoogleDriveUpdate implements WorkItemHandler {
 		String newFilepath = (String) item.getParameter("NewFilepath");
 
 		try {
-			results.put("File", drive.updateFile(fileId, newTitle,
+			results.put("NewFile", drive.updateFile(fileId, newTitle,
 					newDescription, newFilepath));
 		} catch (Exception e) {
 			e.printStackTrace();
