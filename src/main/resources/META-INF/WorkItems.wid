@@ -1,0 +1,75 @@
+import org.drools.core.process.core.datatype.impl.type.StringDataType;
+import org.drools.core.process.core.datatype.impl.type.ListDataType;
+import org.drools.core.process.core.datatype.impl.type.ObjectDataType;
+
+[
+  [
+    "name" : "Google Drive Upload",
+    "parameters" : [
+      "Title" : new StringDataType(),
+      "Description" : new StringDataType(),
+      "Filepath" : new StringDataType()
+    ],
+    "results" : [
+        "File" : new ObjectDataType()
+    ],
+    "displayName" : "Google Drive Upload",
+    "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
+    "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveUpload",
+    "icon" : "Google-Drive-icon.png"
+  ],
+
+  [
+    "name" : "Google Drive List",
+    "parameters" : [],
+    "results" : [
+        "Files" : new ListDataType()
+    ],
+    "displayName" : "Google Drive List",
+    "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
+    "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveList",
+    "icon" : "Google-Drive-icon.png"
+  ],
+  
+  [
+    "name" : "Google Drive Get",
+    "parameters" : [
+      "FileId" : new StringDataType()
+    ],
+    "results" : [
+        "File" : new ObjectDataType()
+    ],
+    "displayName" : "Google Drive Get",
+    "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveGet",
+    "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
+    "icon" : "Google-Drive-icon.png"
+  ],
+  
+  [
+    "name" : "Google Drive Delete",
+    "parameters" : [
+      "FileId" : new StringDataType()
+    ],
+    "displayName" : "Google Drive Delete",
+    "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveDelete",
+    "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
+    "icon" : "Google-Drive-icon.png"
+  ],
+
+  [
+    "name" : "Google Drive Update",
+    "parameters" : [
+      "FileId" : new StringDataType(),
+      "NewTitle" : new StringDataType(),
+      "NewDescription" : new StringDataType(),
+      "NewFilepath" : new StringDataType()
+    ],
+    "results" : [
+        "NewFile" : new ObjectDataType()
+    ],
+    "displayName" : "Google Drive Update",
+    "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveUpdate",
+    "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
+    "icon" : "Google-Drive-icon.png"
+  ],
+]

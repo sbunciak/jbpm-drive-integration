@@ -5,15 +5,18 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.sample</groupId>
-  <artifactId>jbpm-example</artifactId>
+  <groupId>org.jbpm.google</groupId>
+  <artifactId>jbpm-drive-integration</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>jBPM :: Sample Maven Project</name>
-  <description>A sample jBPM Maven project</description>
+  <name>jBPM :: Google Drive Integration</name>
+  <description>Sample integration of Google Drive in jBPM 6</description>
 
   <properties>
     <jbpm.version>6.0.0.Final</jbpm.version>
+    <project.http.version>1.17.0-rc</project.http.version>
+    <project.oauth.version>1.17.0-rc</project.oauth.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
   <repositories>
@@ -38,5 +41,26 @@
       <artifactId>jbpm-test</artifactId>
       <version>${jbpm.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-drive</artifactId>
+      <version>v2-rev111-1.17.0-rc</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+      <version>${project.http.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client-jackson2</artifactId>
+      <version>${project.http.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.oauth-client</groupId>
+      <artifactId>google-oauth-client-jetty</artifactId>
+      <version>${project.oauth.version}</version>
+    </dependency>
   </dependencies>
+    
 </project>

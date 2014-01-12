@@ -5,12 +5,12 @@ $ Compiled class files
 # .*
 !/.gitignore
 # Maven target dir
+target
 target/*
 # Package Files #
 *.jar
 *.war
 *.ear
-target
 .settings/
 .project
 .classpath

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definitions_1" targetNamespace="http://www.jboss.org/drools">
+  <bpmn2:itemDefinition id="ItemDefinition_1" structureRef="ListDataType"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2" structureRef="java.util.List"/>
+  <bpmn2:process id="GoogleDriveListTest" drools:version="1" drools:packageName="org.jbpm.google" drools:adHoc="false" name="Google Drive List Test Process" isExecutable="true">
+    <bpmn2:property id="Files" itemSubjectRef="ItemDefinition_2"/>
+    <bpmn2:startEvent id="StartEvent_1" name="">
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" drools:priority="1" sourceRef="StartEvent_1" targetRef="Task_1"/>
+    <bpmn2:task id="Task_1" drools:taskName="Google Drive List" drools:displayName="Google Drive List" drools:icon="Google-Drive-icon.png" name="Google Drive List">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_InputOutputSpecification_2">
+        <bpmn2:dataOutput id="_DataOutput_2" itemSubjectRef="ItemDefinition_2" name="Files"/>
+        <bpmn2:inputSet id="InputSet_1" name="Input Set 1"/>
+        <bpmn2:outputSet id="_OutputSet_2" name="New Output Set">
+          <bpmn2:dataOutputRefs>_DataOutput_2</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+        <bpmn2:sourceRef>_DataOutput_2</bpmn2:sourceRef>
+        <bpmn2:targetRef>Files</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" drools:priority="1" sourceRef="Task_1" targetRef="EndEvent_1"/>
+    <bpmn2:endEvent id="EndEvent_1" name="">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+    </bpmn2:endEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Google Drive List Test Process">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="GoogleDriveListTest">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="50.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_2" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="290.0" y="50.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1">
+        <dc:Bounds height="50.0" width="110.0" x="138.0" y="43.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_1" targetElement="BPMNShape_Task_1">
+        <di:waypoint xsi:type="dc:Point" x="86.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="109.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="109.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="138.0" y="68.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_Task_1" targetElement="BPMNShape_2">
+        <di:waypoint xsi:type="dc:Point" x="248.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="266.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="266.0" y="68.0"/>
+        <di:waypoint xsi:type="dc:Point" x="290.0" y="68.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
