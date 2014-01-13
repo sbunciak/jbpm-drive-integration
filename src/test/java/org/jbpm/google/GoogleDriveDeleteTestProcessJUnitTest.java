@@ -5,14 +5,11 @@ import java.util.Map;
 
 import org.jbpm.google.handlers.GoogleDriveDelete;
 import org.jbpm.test.JbpmJUnitBaseTestCase;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.process.ProcessInstance;
-
-import com.google.api.services.drive.model.File;
 
 public class GoogleDriveDeleteTestProcessJUnitTest extends
 		JbpmJUnitBaseTestCase {
@@ -51,7 +48,7 @@ public class GoogleDriveDeleteTestProcessJUnitTest extends
 		// do your checks here
 		assertProcessInstanceCompleted(processInstance.getId(), ksession);
 		// TODO: race-condition workaround
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		assertNull(service.getFile(fileId));
 	}
 	
