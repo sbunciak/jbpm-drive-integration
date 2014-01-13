@@ -1,7 +1,7 @@
 jbpm-drive-integration
 ======================
 
-Sample integration of Google Drive withinin jBPM 6.
+Sample integration of Google Drive within jBPM 6.
 ---------------------------------------------------
 
 ## About
