@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jbpm.google.handlers.GoogleDriveUpload;
+import org.jbpm.google.model.SerializableFile;
 import org.jbpm.test.JbpmJUnitBaseTestCase;
 import org.junit.After;
 import org.junit.Test;
@@ -13,17 +14,15 @@ import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.task.TaskService;
 import org.kie.api.task.model.TaskSummary;
 
-import com.google.api.services.drive.model.File;
-
 public class GoogleDriveUploadTestProcessJUnitTest extends
 		JbpmJUnitBaseTestCase {
 
 	private GoogleDriveService service = new GoogleDriveService();
 	private java.io.File file = new java.io.File("src/test/resources/Hello.txt");
-	private File uploadedFile;
+	private SerializableFile uploadedFile;
 
 	public GoogleDriveUploadTestProcessJUnitTest() {
-		super(true, false);
+		super(true, true);
 	}
 
 	@Test
@@ -45,7 +44,7 @@ public class GoogleDriveUploadTestProcessJUnitTest extends
 		ProcessInstance processInstance = ksession.startProcess(
 				"GoogleDriveUploadTest", params);
 		// if necessary, complete request for service task "Google Drive Upload"
-		uploadedFile = (File) this.getVariableValue("File",
+		uploadedFile = (SerializableFile) this.getVariableValue("File",
 				processInstance.getId(), ksession);
 
 		assertNotNull(uploadedFile);
@@ -58,12 +57,12 @@ public class GoogleDriveUploadTestProcessJUnitTest extends
 		// do your checks here
 		assertProcessInstanceCompleted(processInstance.getId(), ksession);
 		// check file on drive
-		assertNotNull(service.getFile(uploadedFile.getId()));
+		assertNotNull(service.getFile(uploadedFile.getFile().getId()));
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		service.deleteFile(uploadedFile.getId());
+		service.deleteFile(uploadedFile.getFile().getId());
 		super.tearDown();
 	}
 }

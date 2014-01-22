@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jbpm.google.handlers.GoogleDriveUpdate;
+import org.jbpm.google.model.SerializableFile;
 import org.jbpm.test.JbpmJUnitBaseTestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class GoogleDriveUpdateTestProcessJUnitTest extends
 	private GoogleDriveService service = new GoogleDriveService();
 
 	public GoogleDriveUpdateTestProcessJUnitTest() {
-		super(true, false);
+		super(true, true);
 	}
 
 	@Before
@@ -56,7 +57,7 @@ public class GoogleDriveUpdateTestProcessJUnitTest extends
 		ProcessInstance processInstance = ksession.startProcess(
 				"GoogleDriveUpdateTest", params);
 		// if necessary, complete request for service task "Google Drive Update"
-		File newFile = (File) this.getVariableValue("NewFile",
+		SerializableFile newFile = (SerializableFile) this.getVariableValue("NewFile",
 				processInstance.getId(), ksession);
 		assertNotNull(newFile);
 
@@ -64,8 +65,8 @@ public class GoogleDriveUpdateTestProcessJUnitTest extends
 				"admin", "en-UK").get(0);
 		taskService.start(task.getId(), "admin");
 		taskService.complete(task.getId(), "admin", null);
+
 		// do your checks here
-		
 		assertProcessInstanceCompleted(processInstance.getId(), ksession);
 		
 		assertEquals(service.getFile(file.getId()).getTitle(),"Hello updated");

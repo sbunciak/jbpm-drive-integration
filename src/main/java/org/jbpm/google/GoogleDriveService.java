@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.jboss.logging.Logger;
 import org.jbpm.google.util.AuthHelper;
 
 public class GoogleDriveService {
+
+	Logger log = Logger.getLogger(GoogleDriveService.class);
 
 	/**
 	 * Be sure to specify the name of your application. If the application name
@@ -39,10 +42,10 @@ public class GoogleDriveService {
 					JacksonFactory.getDefaultInstance(), AuthHelper.authorize())
 					.setApplicationName(APPLICATION_NAME).build();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("An error occured during connection setup: ", e);
 		}
 	}
-	
+
 	/**
 	 * Get file's metadata.
 	 * 
@@ -53,14 +56,10 @@ public class GoogleDriveService {
 		File file = null;
 		try {
 			file = service.files().get(fileId).execute();
-
-//			System.out.println("Title: " + file.getTitle());
-//			System.out.println("Description: " + file.getDescription());
-//			System.out.println("MIME type: " + file.getMimeType());
 		} catch (IOException e) {
-			System.out.println("An error occured: " + e);
+			log.error("An error occured while getting file metadata: ", e);
 		}
-		
+
 		return file;
 	}
 
@@ -80,8 +79,7 @@ public class GoogleDriveService {
 						.execute();
 				return resp.getContent();
 			} catch (IOException e) {
-				// An error occurred.
-				e.printStackTrace();
+				log.error("An error occurred while downloading file: ", e);
 				return null;
 			}
 		} else {
@@ -131,7 +129,7 @@ public class GoogleDriveService {
 
 			return file;
 		} catch (IOException e) {
-			System.out.println("An error occured: " + e);
+			log.error("An error occured while uploading file: ", e);
 			return null;
 		}
 	}
@@ -175,7 +173,7 @@ public class GoogleDriveService {
 
 			return updatedFile;
 		} catch (IOException e) {
-			System.out.println("An error occurred: " + e);
+			log.error("An error occurred while updating file: ", e);
 			return null;
 		}
 	}
@@ -190,7 +188,7 @@ public class GoogleDriveService {
 		try {
 			service.files().delete(fileId).executeUnparsed();
 		} catch (IOException e) {
-			System.out.println("An error occurred: " + e);
+			log.error("An error occurred while deleting file: ", e);
 		}
 	}
 
@@ -210,7 +208,7 @@ public class GoogleDriveService {
 				result.addAll(files.getItems());
 				request.setPageToken(files.getNextPageToken());
 			} catch (IOException e) {
-				System.out.println("An error occurred: " + e);
+				log.error("An error occurred while retrieving files: ", e);
 				request.setPageToken(null);
 			}
 		} while (request.getPageToken() != null

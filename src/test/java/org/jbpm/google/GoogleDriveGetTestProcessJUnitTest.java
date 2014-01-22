@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jbpm.google.handlers.GoogleDriveGet;
+import org.jbpm.google.model.SerializableFile;
 import org.jbpm.test.JbpmJUnitBaseTestCase;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class GoogleDriveGetTestProcessJUnitTest extends JbpmJUnitBaseTestCase {
 	private GoogleDriveService service = new GoogleDriveService();
 
 	public GoogleDriveGetTestProcessJUnitTest() {
-		super(true, false);
+		super(true, true);
 	}
 
 	@Before
@@ -51,7 +52,7 @@ public class GoogleDriveGetTestProcessJUnitTest extends JbpmJUnitBaseTestCase {
 				"GoogleDriveGetTest", params);
 		// if necessary, complete request for service task "Google Drive Get"
 
-		File uploadedFile = (File) this.getVariableValue("File",
+		SerializableFile uploadedFile = (SerializableFile) this.getVariableValue("File",
 				processInstance.getId(), ksession);
 		// if necessary, complete request for service task "Google Drive List"
 		assertNotNull(uploadedFile);
@@ -62,7 +63,7 @@ public class GoogleDriveGetTestProcessJUnitTest extends JbpmJUnitBaseTestCase {
 		taskService.complete(task.getId(), "admin", null);
 
 		// do your checks here
-		assertEquals(file.getFileSize(), uploadedFile.getFileSize());
+		assertEquals(file.getFileSize(), uploadedFile.getFile().getFileSize());
 		assertProcessInstanceCompleted(processInstance.getId(), ksession);
 	}
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jbpm.google.GoogleDriveService;
+import org.jbpm.google.model.SerializableFile;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.api.runtime.process.WorkItemManager;
@@ -27,13 +28,10 @@ public class GoogleDriveUpdate implements WorkItemHandler {
 		String newDescription = (String) item.getParameter("NewDescription");
 		String newFilepath = (String) item.getParameter("NewFilepath");
 
-		try {
-			results.put("NewFile", drive.updateFile(fileId, newTitle,
-					newDescription, newFilepath));
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.abortWorkItem(item, manager);
-		}
+		results.put(
+				"NewFile",
+				new SerializableFile(drive.updateFile(fileId, newTitle,
+						newDescription, newFilepath)));
 
 		manager.completeWorkItem(item.getId(), results);
 	}

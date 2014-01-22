@@ -11,7 +11,7 @@ import org.drools.core.process.core.datatype.impl.type.ObjectDataType;
       "Filepath" : new StringDataType()
     ],
     "results" : [
-        "File" : new ObjectDataType()
+        "File" : new ObjectDataType("org.jbpm.google.model.SerializableFile")
     ],
     "displayName" : "Google Drive Upload",
     "eclipse:customEditor" : "org.drools.eclipse.flow.common.editor.editpart.work.SampleCustomEditor",
@@ -36,7 +36,7 @@ import org.drools.core.process.core.datatype.impl.type.ObjectDataType;
       "FileId" : new StringDataType()
     ],
     "results" : [
-        "File" : new ObjectDataType()
+        "File" : new ObjectDataType("org.jbpm.google.model.SerializableFile")
     ],
     "displayName" : "Google Drive Get",
     "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveGet",
@@ -64,7 +64,7 @@ import org.drools.core.process.core.datatype.impl.type.ObjectDataType;
       "NewFilepath" : new StringDataType()
     ],
     "results" : [
-        "NewFile" : new ObjectDataType()
+        "NewFile" : new ObjectDataType("org.jbpm.google.model.SerializableFile")
     ],
     "displayName" : "Google Drive Update",
     "defaultHandler" : "org.jbpm.google.handlers.GoogleDriveUpdate",

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jbpm.google.GoogleDriveService;
+import org.jbpm.google.model.SerializableFile;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemHandler;
 import org.kie.api.runtime.process.WorkItemManager;
@@ -26,13 +27,10 @@ public class GoogleDriveUpload implements WorkItemHandler {
 		String description = (String) item.getParameter("Description");
 		String filepath = (String) item.getParameter("Filepath");
 
-		try {
-			results.put("File",
-					drive.insertFile(title, description, null, filepath));
-		} catch (Exception e) {
-			e.printStackTrace();
-			this.abortWorkItem(item, manager);
-		}
+		results.put(
+				"File",
+				new SerializableFile(drive.insertFile(title, description, null,
+						filepath)));
 
 		manager.completeWorkItem(item.getId(), results);
 	}

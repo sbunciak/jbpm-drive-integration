@@ -18,7 +18,7 @@ public class GoogleDriveDeleteTestProcessJUnitTest extends
 	private GoogleDriveService service = new GoogleDriveService();
 
 	public GoogleDriveDeleteTestProcessJUnitTest() {
-		super(true, false);
+		super(true, true);
 	}
 
 	@Before
